@@ -25,8 +25,8 @@ public class MainGame extends JFrame{
 		players = new ArrayList<Player>();
 		// ADD YOUR PLAYERS HERE! BE SURE THE HUMAN IS THE FIRST IN THE LIST.
 
-		players.add(new HumanPlayer());
-		players.add(new ComputerPlayer());
+		players.add(new HumanPlayer(graphics));
+		players.add(new ComputerPlayer(graphics));
 		// Grid can be initialized as soon as the players are added
 		graphics.initialize(players); 
 				
@@ -121,6 +121,7 @@ public class MainGame extends JFrame{
 		public void keyPressed(KeyEvent e){
 			int keyCode = e.getKeyCode();
 			// Assumes human is first player in list
+	
 			Player player = players.get(0);
 			switch ( keyCode )
 			{

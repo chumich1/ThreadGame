@@ -4,9 +4,14 @@ import java.util.Random;
 
 public class ComputerPlayer extends Player {
 
-	public ComputerPlayer() {
-		super();
+	public ComputerPlayer(GraphicsPanel g) {
+		super(g);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void run(){
+		chooseDirection();
+		super.run();
 	}
 
 	@Override
@@ -19,6 +24,7 @@ public class ComputerPlayer extends Player {
 	@Override
 	public void chooseDirection() {
 		// TODO Auto-generated method stub
+		direction = 'L';
 
 	}
 

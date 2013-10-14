@@ -2,10 +2,12 @@ package ThreadGameSkeleton.src;
 
 public class HumanPlayer extends Player {
 
-	public HumanPlayer() {
-		super();
+	public HumanPlayer(GraphicsPanel g) {
+		super(g);
 		// TODO Auto-generated constructor stub
 	}
+	
+
 
 	@Override
 	public void setInitialLocation() {
