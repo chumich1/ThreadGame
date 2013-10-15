@@ -8,12 +8,14 @@ public abstract class Player implements Runnable {
 	char direction;
 	GraphicsPanel gPanel;
 	int DELAY;
+	boolean stop_playing;
 	
 	
 	public Player(GraphicsPanel gPanel, int DELAY){
 		this.DELAY = DELAY;
 		this.gPanel = gPanel;
 		this.points = 0;
+		stop_playing = false;
 		direction = 'D';
 		this.setInitialLocation();
 	}
@@ -35,7 +37,7 @@ public abstract class Player implements Runnable {
 		move();
 		}
 		
-		//System.out.println(gPanel.isTarget(location));
+		
 		this.targetRemoval();
 		
 	
@@ -51,7 +53,7 @@ public abstract class Player implements Runnable {
 
 	public void stopPlaying() {
 		// TODO Auto-generated method stub
-		
+		stop_playing = true;
 	}
 
 	public int getPoints() {
@@ -60,6 +62,10 @@ public abstract class Player implements Runnable {
 	}
 	
 	public void targetRemoval(){
+		
+		//Target locations must be locked to prevent other players from removing locations
+		//after this point.
+		synchronized(gPanel.targetLocs){
 		if(gPanel.isTarget(location)){
 			for(int j = 0; j < gPanel.targetLocs.size(); j++){
 				if(location.equals(gPanel.targetLocs.get(j))){
@@ -67,6 +73,7 @@ public abstract class Player implements Runnable {
 					this.points++;
 				}
 			}
+		}
 		}
 	}
 	
@@ -99,7 +106,7 @@ public abstract class Player implements Runnable {
 	public abstract void chooseDirection();
 	
 	public synchronized void move(){
-		System.out.println(direction);
+
 		synchronized(location){
 		//check if up is minus or plus
 		switch (direction){

@@ -10,7 +10,7 @@ public class ComputerPlayer extends Player {
 	}
 	
 	public void run(){
-		for(int i = 0; i<1000000; i++){
+		while(!this.stop_playing){
 	
 		chooseDirection();
 		super.run();
@@ -24,7 +24,7 @@ public class ComputerPlayer extends Player {
 		this.location = new Location(rand.nextInt(10), rand.nextInt(10));
 	}
 
-	
+	//Checks if the direction of the previous move is blocked
 	public boolean checkDirection(){
 		if(direction == 'U'){
 			return gPanel.isBlocked(new Location(location.getX(), location.getY() - 1), true);
@@ -116,9 +116,12 @@ public class ComputerPlayer extends Player {
 			i++;
 		
 		}
-		System.out.println(target_found);
-		if(!target_found && checkDirection()){
-			Random rand = new Random();
+	
+		Random rand = new Random();
+		//If a target was not found it will check if the current direction is blocked
+		//If the current direction is not blocked, there is a 50% chance of following that direction
+		if(!target_found && (checkDirection() || rand.nextInt()%2 == 0)){
+			
 			int r = rand.nextInt(4)+1;
 			switch (r%4){
 			case 0: direction = 'U';

@@ -8,7 +8,7 @@ public class HumanPlayer extends Player {
 	}
 	
 	public void run(){
-		for(int i = 0; i<1000000; i++){
+		while(!this.stop_playing){
 			super.run();
 		}
 	}

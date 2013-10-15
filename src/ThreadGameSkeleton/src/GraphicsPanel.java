@@ -1,3 +1,7 @@
+
+/*The target locations should be locked in the 'isTarget' method so that multiple players cannot
+get the same target
+*/
 package ThreadGameSkeleton.src;
 import java.awt.*;
 import java.awt.geom.*;
@@ -176,6 +180,9 @@ public class GraphicsPanel extends JPanel{
 	//Return true if the given location is a target. Return false otherwise
 	public boolean isTarget(Location l){
 		//Return true if the location is a target
+		//The target locations should be locked so that multiple players cannot
+		//get the same target
+		synchronized (targetLocs){
 		for(int i = 0; i < targetLocs.size(); i++){
 			if(l.equals(targetLocs.get(i))){
 				return true;
@@ -183,6 +190,7 @@ public class GraphicsPanel extends JPanel{
 		}
 		//Return false otherwise
 		return false;
+		}
 	}
 
 	//Return true if the parameter is in targetLocs.  Removes the target.
