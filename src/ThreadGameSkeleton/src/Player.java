@@ -7,9 +7,11 @@ public abstract class Player implements Runnable {
 	Location location;
 	char direction;
 	GraphicsPanel gPanel;
+	int DELAY;
 	
 	
-	public Player(GraphicsPanel gPanel){
+	public Player(GraphicsPanel gPanel, int DELAY){
+		this.DELAY = DELAY;
 		this.gPanel = gPanel;
 		this.points = 0;
 		direction = 'D';
@@ -21,9 +23,9 @@ public abstract class Player implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		for(int i = 0; i<1000000; i++){
+		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(DELAY);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -33,10 +35,10 @@ public abstract class Player implements Runnable {
 		move();
 		}
 		
-		System.out.println(gPanel.isTarget(location));
+		//System.out.println(gPanel.isTarget(location));
 		this.targetRemoval();
 		
-		}
+	
 		
 		
 	}
